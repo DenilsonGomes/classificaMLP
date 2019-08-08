@@ -21,18 +21,18 @@ X = table2array(X)';
 Y = table2array(Y)';
 
 % %Mapeia as classes para {1,2,3}
-% for i=1:length(Y)
-%     if(Y(i)<3) %Entre 0 e 3.9
-%         Yaux(i) = 1; %Classe 1
-%     end
-%     if(Y(i)>=3 && Y(i)<5) %Entre 4 e 7.9
-%         Yaux(i) = 2; %classe 2
-%     end
-%     if(Y(i) == 5) %Entre 8 e 10
-%         Yaux(i) = 3; %classe 3
-%     end
-% end
-% Y = Yaux;
+for i=1:length(Y)
+    if(Y(i)<4) %Entre 0 e 3.9
+        Yaux(i) = 1; %Classe 1
+    end
+    if(Y(i) >= 4 && Y(i) < 7) %Entre 4 e 6.9
+        Yaux(i) = 2; %classe 2
+    end
+    if(Y(i) >= 7) %Entre 7 e 10
+        Yaux(i) = 3; %classe 3
+    end
+end
+Y = Yaux;
 
 %MultiLayer Perceptron Networking initializarion
 mlp = feedforwardnet([5 7]);
