@@ -2,15 +2,16 @@
 %Graduando em Engenharia da Computação
 %Estudo sobre Evasão do Curso de Engenharia de Computação
 
-clear %limpa as variaveis
+clearvars -except indiceExt selecoes acuraciaExt acuraciasIniciaisExt %limpa as variaveis
 clc %limpa o visor 
 close all
 
 % Lendo os dados:
-[fname path]=uigetfile('*.csv'); 
-fname=strcat(path,fname);
+% [fname path]=uigetfile('*.csv'); 
+% fname=strcat(path,fname);
 % Preenchendo a tabela total tbl:
-tbl = readtable(fname);
+% tbl = readtable(fname);
+tbl = readtable('C:\Users\Tery\Dropbox\Evasão na Eng Comput UFC\redeMLP\calculo1.csv');
 
 % Variavel dependente Y: Última coluna da tabela
 % Dados X: Todas as colunas (exceto última)
@@ -35,7 +36,7 @@ end
 Y = Yaux;
 
 %MultiLayer Perceptron Networking initializarion
-mlp = feedforwardnet([5 7]);
+mlp = feedforwardnet([10 10]);
 mlp.layers{1}.transferFcn = 'tansig';
 mlp.layers{2}.transferFcn = 'tansig';
 
@@ -82,7 +83,7 @@ desempenhoAtual = desempenhoAnterior; %atribuição para entrar no while na primei
 while desempenhoAnterior <= desempenhoAtual %enquanto alguma variavel melhorar o desempenho do modelo
      
     %MultiLayer Perceptron Networking initializarion
-    mlp = feedforwardnet([5 7]);
+    mlp = feedforwardnet([10 10]);
     mlp.layers{1}.transferFcn = 'tansig';
     mlp.layers{2}.transferFcn = 'tansig';
     
@@ -122,6 +123,8 @@ while desempenhoAnterior <= desempenhoAtual %enquanto alguma variavel melhorar o
         acuraciaAtual(v) = mean(acuracia); %media de acuracia da v-esima variavel
     end   
     [desempenhoAtual,g] = max(acuraciaAtual); %pega a variavel que obteve maior acuracia
+    %testando se diminui o tamanho de acuraciAtual aki
+    clear acuraciaAtual
     
     %Caso alguma variavel melhore o modelo
     if desempenhoAnterior <= desempenhoAtual
